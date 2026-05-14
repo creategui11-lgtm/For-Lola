@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Romantic Letter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8d7da, #fce4ec);
+            font-family: Georgia, serif;
+            overflow: hidden;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .container {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            cursor: pointer;
+        }
+        /* Solid back pocket of the envelope */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ffb6c1;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        /* Top flap */
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ff8fab;
+            clip-path: polygon(0 0, 50% 60%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.8s ease, z-index 0.8s ease;
+            z-index: 4;
+            border-radius: 10px 10px 0 0;
+        }
+        /* Front pocket */
+        .front {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffa6c9;
+            clip-path: polygon(0 40%, 50% 60%, 100% 40%, 100% 100%, 0 100%);
+            z-index: 3;
+            border-radius: 0 0 10px 10px;
+        }
+        /* Letter - Container set to contain text overflow */
+        .letter {
+            position: absolute;
+            left: 50%;
+            bottom: 5px;
+            transform: translate(-50%, 20px) scale(0.8);
+            width: 290px;
+            height: 200px; /* Slightly taller for better reading room */
+            background: white;
+            border-radius: 8px;
+            padding: 15px 10px 15px 15px; /* Right padding adjusted for scrollbar */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), z-index 1s ease, opacity 0.4s ease;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Inside wrapper that handles scrolling */
+        .letter-content {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 5px;
+            text-align: center;
+        }
+        .letter h1 {
+            font-size: 22px;
+            color: #d6336c;
+            margin-bottom: 8px;
+        }
+        .letter p {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+        
+        /* Custom cute pink scrollbar */
+        .letter-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .letter-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .letter-content::-webkit-scrollbar-thumb {
+            background: #ff8fab;
+            border-radius: 10px;
+        }
+
+        /* Animation States */
+        .container.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        /* Letter shifts higher up so more text is visible at once */
+        .container.open .letter {
+            opacity: 1;
+            transform: translate(-50%, -140px) scale(1);
+            z-index: 5;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition-delay: 0.1s; 
+        }
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: float 4s linear infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-600px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        .instruction {
+            font-size: 18px;
+            color: #b03060;
+            font-family: cursive;
+            user-select: none;
+            margin-top: 20px; /* Pushes text below container spacing */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="envelope">
+        <div class="flap"></div>
+        <div class="envelope"></div>
+        <div class="letter">
+            <div class="letter-content">
+                <h1>To Lola ❤️</h1>
+                <p>
+                    Dear Lola, 
+To be honest I don't write letters like ever so my apologies if it doesn't sound like how a letter should be. I am writing this because I know how much you like letters and since I can't write you an actual letter cause I wouldn't know how to get it to you, so I'm writing a virtual letter which I hope is good enough. I'm not writing this too selfishly convince you to talk to me especially if your not ready yet and still trying to figure out how you're feeling but to be honest I just been thinking about you a lot that even though we are not in a relationship and I've only talked to you about almost a month which might seem short but for me its kind of long but still I find myself to lay awake late at night telling myself "I hope she is doing okay" I know I told you I lost my grandpa to cancer but that was when I was like a baby so i didn't get the chance to grief but my mom even to this day speaks very highly of him and sometimes get emotionally. The only time I ever lost someone was my dog which I basically grew up with my entire life so when he died it was truly heartbreaking. He died in 2023 and that was the last time I cried honestly. Just like most people I would spend a couple of days thinking like why or beating myself up with things I could've done with him for example would be like taking him to swim since he never did. But it only took me a couple of days to be alright since time is always going to keep moving whether I like it or not and I can't just sit down and be sad all the time while time passes me by. Imagine if 4 years later I still was I would've never had the pleasure of trying to meet new people and would've never had the pleasure of meeting you. Of course just because he's gone means he will be forgotten. I always knew when you are feeling some type of way you like to avoid talking to anyone when you're depressed/sad and trust me I totally get it but at the same time I hope that doesn't make you feel "lonely" if you know what I mean. People always grief differently but I also hope you know you have tons of people that care for you and if you did feel like talking about how you might be feeling to anyone I think that can help a little. You know yourself better than anyone so I trust you know what to do. I just don't want you to like bottling up your emotions because take it from a guy that almost always does all that comes out at some point and it sucks. I hope you're doing okay now even if it's a little and always remember even if you don't text me anytime soon after seeing this I just want you to be okay that's all. I already know stuff like this takes time so take as much time as you want. Just know ill always be thinking about you and if you did text me know ill answer immediately like always haha. I have this week and next depending on when you see this letter honestly but spring semester is almost ending. I do have finals but I'm never too busy for you as you can see I had time to write this letter for you. Also sorry that's it getting hot, summer is almost here and it's already getting hot and I know how much you hate the heat so i hope you get through it. I know how you love letters so I hope i can keep writing like this but with actual paper lol even if you don't respond as long as you enjoyed reading it and its at least okay I can keep writing you letters more often. But for now Lola I hope you're doing okay at this time! Stay Safe!
+
+
+                </p>
+            </div>
+        </div>
+        <div class="front"></div>
+    </div>
+
+    <div class="instruction">Click the envelope 💌</div>
+
+    <script>
+        const envelope = document.getElementById("envelope");
+        envelope.addEventListener("click", (e) => {
+            // Prevent closing the envelope if the user is just clicking/scrolling the text area
+            if (e.target.closest('.letter-content')) return;
+            
+            envelope.classList.toggle("open");
+            if(envelope.classList.contains("open")) {
+                createHearts();
+            }
+        });
+
+        function createHearts() {
+            for(let i = 0; i < 20; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = "80%";
+                heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+    </script>
+</body>
+</html>
